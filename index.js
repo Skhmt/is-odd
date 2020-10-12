@@ -10,6 +10,11 @@
 const isNumber = require('is-number');
 
 module.exports = function isOdd(value) {
+  if (typeof(value) === 'bigint') {
+    const b = value < 0n ? -1n * value : value;
+    return (b % 2n) === 1n;
+  }
+  
   const n = Math.abs(value);
   if (!isNumber(n)) {
     throw new TypeError('expected a number');
